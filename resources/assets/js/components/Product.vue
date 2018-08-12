@@ -47,8 +47,8 @@
 						        <tbody>
 							    	<tr v-for="(producto,index) in this.productos" :key="index" >
 										
-										<td class="col-md-4" v-for="(img,index) in producto.image" :key="index">
-											<img src="/uploads/" class="img-responsive" v-text="img.id" style="width: 50%;" />
+										<td class="col-md-4" >
+											<img src="/uploads/'.{{ producto.image[0].producto_id }}/min_{{producto.image[0].file_name}}'" class="img-responsive"  style="width: 50%;" />
 										</td> 
 									      <td class="col-md-2" v-text="producto.titulo"></td>
 									      <td class="col-md-2" v-text="producto.codigo"></td>
