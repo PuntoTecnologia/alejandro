@@ -16,6 +16,23 @@
 						</a>
 					</div>
 				<div class="col-md-12" style="padding-top: 3em;">
+					<div class="form-group row">
+                            
+                                <div class=" col-md-2 ">
+                                    <select class="form-control" v-model="criterio" >
+                                      <option value="titulo">Titulo</option>
+                                      <option value="codigo">Codigo</option>
+                                    </select>
+                                </div>
+								<div class=" col-md-6 ">
+                                    <input type="text" v-model="buscar" @keyup.enter="listarProductos(1,buscar,criterio)" class="form-control col-md-2" placeholder="Texto a buscar">
+									<button type="submit" @click="listarProductos(1,buscar,criterio)" class="btn btn-primary col-md-2"><i class="fa fa-search"></i> Buscar</button>
+                                </div>
+								
+										
+								
+                           
+                        </div>
 							<table  id="tabla" class="display table" cellspacing="0" width="100%">
 						        <thead>
 								    <tr>
@@ -30,8 +47,8 @@
 						        <tbody>
 							    	<tr v-for="(producto,index) in this.productos" :key="index" >
 										
-										<td class="col-md-4">
-											<img src="/uploads/'.{{}}'" class="img-responsive" alt="" style="width: 50%;"/>
+										<td class="col-md-4" v-for="(img,index) in producto.image" :key="index">
+											<img src="/uploads/" class="img-responsive" v-text="img.id" style="width: 50%;" />
 										</td> 
 									      <td class="col-md-2" v-text="producto.titulo"></td>
 									      <td class="col-md-2" v-text="producto.codigo"></td>
@@ -45,6 +62,22 @@
 									    </tr>
 								  </tbody>
 						    </table>
+							<div class="row">
+									<nav class="col-md-4">
+                            <ul class="pagination">
+                                <li class="page-item" v-if="this.pagination.current_page > 1">
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(this.pagination.current_page - 1,buscar,criterio)">Ant</a>
+                                </li>
+                                <li class="page-item"  v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
+                                </li>
+                                <li class="page-item" v-if="this.pagination.current_page < this.pagination.last_page">
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(this.pagination.current_page + 1,buscar,criterio)">Sig</a>
+                                </li>
+                            </ul>
+                        </nav>					
+							</div>
+							
 				</div>
 			</div>
 		</div>
@@ -62,27 +95,83 @@ import axios from 'axios';
 		data (){
 			 return {
 				  msg: 'Welcome to Your Vue.js App',
-				  productos:[]
+				  productos:[],
+				  imagenes:[],
+				   pagination : {
+                    total : 0,
+                    current_page : 0,
+                    per_page : 0,
+                    last_page : 0,
+                    from : 0,
+                    to : 0,
+                },
+                offset : 3,
+                criterio : 'titulo',
+                buscar : ''
    			 }
 		},
+		computed:{
+            isActived: function(){
+                return this.pagination.current_page;
+            },
+            //Calcula los elementos de la paginación
+            pagesNumber: function() {
+                if(!this.pagination.to) {
+                    return [];
+                }
+                
+                var from = this.pagination.current_page - this.offset; 
+                if(from < 1) {
+                    from = 1;
+                }
+
+                var to = from + (this.offset * 2); 
+                if(to >= this.pagination.last_page){
+                    to = this.pagination.last_page;
+                }  
+
+                var pagesArray = [];
+                while(from <= to) {
+                    pagesArray.push(from);
+                    from++;
+                }
+                return pagesArray;             
+
+            }
+        },
 		methods:{
-			listarProductos(){
-				var app=this;
-				axios.get('/GetProductos')
+			listarProductos(page,buscar,criterio){
+				let app=this;
+				var url='/GetProductos?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
+				axios.get(url)
 				.then(function (response) {
-					app.productos=response.data;
+					var respuesta=response.data;
+					app.productos=respuesta.productos.data;
+					app.pagination=respuesta.pagination;
+
+					
 				})
 				.catch(function (error) {
 					console.log(error);
 				});
-				this.productos=app.productos;
+				
 			},
+			cambiarPagina(page,buscar,criterio){
+                let me = this;
+                //Actualiza la página actual
+                me.pagination.current_page = page;
+                //Envia la petición para visualizar la data de esa página
+                me.listarProductos(page,buscar,criterio);
+            },
 			editarFoto(producto){
 				window.location.href='/EDITAR-ARTICULO-IMG/'+producto.id
 				
 			},
 			editarInfo(producto){
-		        window.location.href='/EDITAR-ARTICULO/'+producto.id;
+				
+					console.log(producto.image);
+				
+		      window.location.href='/EDITAR-ARTICULO/'+producto.id;
 				
 			},
 			eliminarProducto(producto){
@@ -100,6 +189,7 @@ import axios from 'axios';
 		},
 	mounted(){
 			this.listarProductos();
+			
 		}
     }
 </script>

@@ -44,8 +44,7 @@
   </head>
   <body>
         @include ('elements.menu');        
-        <div class="main">
-        	<div class="container">
+        
             	
         @yield ('content')
         @yield ('footer')

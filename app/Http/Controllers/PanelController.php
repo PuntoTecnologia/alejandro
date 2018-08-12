@@ -53,10 +53,40 @@ class PanelController extends Controller
 
 	    	return view('panel.products.catalogo');
 		}
-		public function getProductos(){
-			$productos= product::get();
-		    
-			return $productos;
+		public function getProductos(Request $request){
+			
+			if (!$request->ajax()) return redirect('/');
+
+			$buscar = $request->buscar;
+			$criterio = $request->criterio;
+        
+        if ($buscar=='undefined'){
+            $product = Product::orderBy('id', 'desc')->paginate(10);
+        }
+        else {
+            $product = Product::where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(10);
+		}
+		foreach($product as $p){
+			$p->imagenes=$p->image;
+			
+		}
+		
+		
+
+		
+        return [
+            'pagination' => [
+                'total'        => $product->total(),
+                'current_page' => $product->currentPage(),
+                'per_page'     => $product->perPage(),
+                'last_page'    => $product->lastPage(),
+                'from'         => $product->firstItem(),
+                'to'           => $product->lastItem(),
+            ],
+			'productos' => $product,
+			
+			
+        ];
 		}
 
 	public function estadisticas()

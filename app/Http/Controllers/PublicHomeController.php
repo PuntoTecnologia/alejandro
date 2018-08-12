@@ -11,6 +11,7 @@ class PublicHomeController extends Controller
 {
     public function index()
     {
+       
     	$categorias = DB::table('categorias')->get();
     	return view('web.home')->with('categorias', $categorias);
     }
@@ -73,8 +74,7 @@ class PublicHomeController extends Controller
         ->limit(45)
         ->groupby('img_productos.producto_id')
         ->get();
-        //return dd($productos);
-        return view('web.product')->with('productos', $productos)->with('categorias', $categorias);
+        return view('web\product')->with('productos', $productos)->with('categorias', $categorias);
     }
     //RUTAS DEL MENU PRINCIPAL
     //EL PRIMER CASO - PADRE SOLO MENU PRINCIPAL
