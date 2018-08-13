@@ -61,10 +61,10 @@ class PanelController extends Controller
 			$criterio = $request->criterio;
         
         if ($buscar=='undefined'){
-            $product = Product::orderBy('id', 'desc')->paginate(5);
+            $product = Product::orderBy('titulo', 'asc')->paginate(10);
         }
         else {
-            $product = Product::where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(5);
+            $product = Product::where($criterio, 'like', '%'. $buscar . '%')->orderBy('titulo', 'asc')->paginate(10);
 		}
 		//La unica
 		foreach($product as $p){

@@ -43712,6 +43712,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -43949,9 +43951,11 @@ var render = function() {
                     return _c("tr", { key: index }, [
                       producto.image.length == 0
                         ? _c("td", { staticClass: "col-md-4" }, [
-                            _c("p", [_vm._v("No contiene una imagen asignada")])
+                            _c("p", { staticClass: "text-center" }, [
+                              _vm._v("Sin Foto")
+                            ])
                           ])
-                        : _c("td", { staticClass: "col-md-4" }, [
+                        : _c("td", { staticClass: "col-md-2" }, [
                             _c("img", {
                               staticClass: "img-responsive",
                               staticStyle: { width: "80%" },
@@ -43966,7 +43970,7 @@ var render = function() {
                           ]),
                       _vm._v(" "),
                       _c("td", {
-                        staticClass: "col-md-2",
+                        staticClass: "col-md-4",
                         domProps: { textContent: _vm._s(producto.titulo) }
                       }),
                       _vm._v(" "),
@@ -43985,13 +43989,8 @@ var render = function() {
                         domProps: { textContent: _vm._s(producto.rent) }
                       }),
                       _vm._v(" "),
-                      _c(
-                        "td",
-                        {
-                          staticClass: "col-md-2",
-                          staticStyle: { display: "inline-flex" }
-                        },
-                        [
+                      _c("td", { staticClass: "col-md-2" }, [
+                        _c("div", { staticStyle: { display: "inline-flex" } }, [
                           _c(
                             "button",
                             {
@@ -44035,8 +44034,8 @@ var render = function() {
                             },
                             [_vm._v("Eliminar")]
                           )
-                        ]
-                      )
+                        ])
+                      ])
                     ])
                   })
                 )

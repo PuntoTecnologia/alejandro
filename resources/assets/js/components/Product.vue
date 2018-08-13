@@ -49,22 +49,24 @@
 						        <tbody>
 							    	<tr v-for="(producto,index) in this.productos" :key="index" >
 										<td class="col-md-4" v-if="producto.image.length==0" >
-											<p >No contiene una imagen asignada</p>
+											<p class="text-center">Sin Foto</p>
 											
 										</td> 
-										<td  v-else class="col-md-4"  >
+										<td  v-else class="col-md-2"  >
 											<img  v-bind:src="`/uploads/${ producto.id }/min_${ producto.image[0].file_name}`"  class="img-responsive"  style="width: 80%;" />
 
 										</td> 
 										
-									      <td class="col-md-2" v-text="producto.titulo"></td>
+									      <td class="col-md-4" v-text="producto.titulo"></td>
 									      <td class="col-md-2" v-text="producto.codigo"></td>
 									      <td class="col-md-1" v-text="producto.costo"></td>
 									      <td class="col-md-1" v-text="producto.rent"></td>
-									      <td class="col-md-2" style="display: inline-flex;">
+									      <td class="col-md-2" >
+									      	<div style="display: inline-flex;">
 											<button @click="editarFoto(producto)" type="button" class="btn btn-primary">Editar Fotos</button>
 											<button @click="editarInfo(producto)" style="margin-left: 0.5em;" type="button" class="btn btn-primary">Editar Info</button>
 									      	<button type="button" @click="eliminarProducto(producto)" class="btn btn-primary btn-delete" style="margin-left: 0.5em;">Eliminar</button>   	
+									      </div>
 									      </td>
 									    </tr>
 								  </tbody>
