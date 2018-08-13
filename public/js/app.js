@@ -43946,111 +43946,98 @@ var render = function() {
                 _c(
                   "tbody",
                   _vm._l(this.productos, function(producto, index) {
-                    return _c(
-                      "tr",
-                      { key: index },
-                      [
-                        producto.image.length == 0
-                          ? _c("td", { staticClass: "col-md-4" }, [
-                              _c("p", [
-                                _vm._v("No contiene una imagen asignada")
-                              ])
-                            ])
-                          : _vm._l(producto.image, function(i, j) {
-                              return _c(
-                                "td",
-                                { key: j, staticClass: "col-md-4" },
-                                [
-                                  _c("img", {
-                                    staticClass: "img-responsive",
-                                    staticStyle: { width: "80%" },
-                                    attrs: {
-                                      src:
-                                        "/uploads/" +
-                                        producto.id +
-                                        "/min_" +
-                                        i.file_name
-                                    }
-                                  })
-                                ]
-                              )
-                            }),
-                        _vm._v(" "),
-                        _c("td", {
+                    return _c("tr", { key: index }, [
+                      producto.image.length == 0
+                        ? _c("td", { staticClass: "col-md-4" }, [
+                            _c("p", [_vm._v("No contiene una imagen asignada")])
+                          ])
+                        : _c("td", { staticClass: "col-md-4" }, [
+                            _c("img", {
+                              staticClass: "img-responsive",
+                              staticStyle: { width: "80%" },
+                              attrs: {
+                                src:
+                                  "/uploads/" +
+                                  producto.id +
+                                  "/min_" +
+                                  producto.image[0].file_name
+                              }
+                            })
+                          ]),
+                      _vm._v(" "),
+                      _c("td", {
+                        staticClass: "col-md-2",
+                        domProps: { textContent: _vm._s(producto.titulo) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        staticClass: "col-md-2",
+                        domProps: { textContent: _vm._s(producto.codigo) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        staticClass: "col-md-1",
+                        domProps: { textContent: _vm._s(producto.costo) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        staticClass: "col-md-1",
+                        domProps: { textContent: _vm._s(producto.rent) }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        {
                           staticClass: "col-md-2",
-                          domProps: { textContent: _vm._s(producto.titulo) }
-                        }),
-                        _vm._v(" "),
-                        _c("td", {
-                          staticClass: "col-md-2",
-                          domProps: { textContent: _vm._s(producto.codigo) }
-                        }),
-                        _vm._v(" "),
-                        _c("td", {
-                          staticClass: "col-md-1",
-                          domProps: { textContent: _vm._s(producto.costo) }
-                        }),
-                        _vm._v(" "),
-                        _c("td", {
-                          staticClass: "col-md-1",
-                          domProps: { textContent: _vm._s(producto.rent) }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          {
-                            staticClass: "col-md-2",
-                            staticStyle: { display: "inline-flex" }
-                          },
-                          [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-primary",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    _vm.editarFoto(producto)
-                                  }
+                          staticStyle: { display: "inline-flex" }
+                        },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  _vm.editarFoto(producto)
                                 }
-                              },
-                              [_vm._v("Editar Fotos")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-primary",
-                                staticStyle: { "margin-left": "0.5em" },
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    _vm.editarInfo(producto)
-                                  }
+                              }
+                            },
+                            [_vm._v("Editar Fotos")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary",
+                              staticStyle: { "margin-left": "0.5em" },
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  _vm.editarInfo(producto)
                                 }
-                              },
-                              [_vm._v("Editar Info")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-primary btn-delete",
-                                staticStyle: { "margin-left": "0.5em" },
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    _vm.eliminarProducto(producto)
-                                  }
+                              }
+                            },
+                            [_vm._v("Editar Info")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary btn-delete",
+                              staticStyle: { "margin-left": "0.5em" },
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  _vm.eliminarProducto(producto)
                                 }
-                              },
-                              [_vm._v("Eliminar")]
-                            )
-                          ]
-                        )
-                      ],
-                      2
-                    )
+                              }
+                            },
+                            [_vm._v("Eliminar")]
+                          )
+                        ]
+                      )
+                    ])
                   })
                 )
               ]

@@ -52,8 +52,8 @@
 											<p >No contiene una imagen asignada</p>
 											
 										</td> 
-										<td  v-else class="col-md-4" v-for="(i,j) in producto.image" :key="j" >
-											<img  v-bind:src="`/uploads/${ producto.id }/min_${i.file_name}`"  class="img-responsive"  style="width: 80%;" />
+										<td  v-else class="col-md-4"  >
+											<img  v-bind:src="`/uploads/${ producto.id }/min_${ producto.image[0].file_name}`"  class="img-responsive"  style="width: 80%;" />
 
 										</td> 
 										
