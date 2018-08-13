@@ -50,7 +50,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div class="top_right">
 									<ul>
 										<li><a href="/mostrador/punto_venta">Mostrador</a></li> |
-										<li>Dolar: u$-</li>
+										<li>Dolar: u$-{{$dolar[0]->valor}}</li>
 
 									</ul>
 									</div><h2><span></span> Soporte (0223) 15 579 1092</h2>
