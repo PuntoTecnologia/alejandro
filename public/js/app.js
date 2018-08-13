@@ -43708,6 +43708,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -43946,25 +43950,31 @@ var render = function() {
                       "tr",
                       { key: index },
                       [
-                        _vm._l(producto.image, function(i, j) {
-                          return _c("td", { key: j, staticClass: "col-md-4" }, [
-                            i != null
-                              ? _c("img", {
-                                  staticClass: "img-responsive",
-                                  staticStyle: { width: "100%" },
-                                  attrs: {
-                                    src:
-                                      "/uploads/" +
-                                      producto.id +
-                                      "/min_" +
-                                      i.file_name
-                                  }
-                                })
-                              : _c("p", [
-                                  _vm._v("No contiene una imagen asignada")
-                                ])
-                          ])
-                        }),
+                        producto.image.length == 0
+                          ? _c("td", { staticClass: "col-md-4" }, [
+                              _c("p", [
+                                _vm._v("No contiene una imagen asignada")
+                              ])
+                            ])
+                          : _vm._l(producto.image, function(i, j) {
+                              return _c(
+                                "td",
+                                { key: j, staticClass: "col-md-4" },
+                                [
+                                  _c("img", {
+                                    staticClass: "img-responsive",
+                                    staticStyle: { width: "80%" },
+                                    attrs: {
+                                      src:
+                                        "/uploads/" +
+                                        producto.id +
+                                        "/min_" +
+                                        i.file_name
+                                    }
+                                  })
+                                ]
+                              )
+                            }),
                         _vm._v(" "),
                         _c("td", {
                           staticClass: "col-md-2",
@@ -44171,9 +44181,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { staticClass: "text-center", attrs: { scope: "col" } }, [
-          _vm._v("IMG")
-        ]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("IMG")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("TITULO")]),
         _vm._v(" "),

@@ -38,7 +38,7 @@
 							<table  id="tabla" class="display table" cellspacing="0" width="100%">
 						        <thead>
 								    <tr>
-								      <th scope="col" class="text-center">IMG</th>
+								      <th scope="col" >IMG</th>
 								      <th scope="col">TITULO</th>
 								      <th scope="col">CODIGO</th>
 								      <th scope="col">COSTO</th>
@@ -48,11 +48,15 @@
 								</thead>
 						        <tbody>
 							    	<tr v-for="(producto,index) in this.productos" :key="index" >
-										
-										<td class="col-md-4" v-for="(i,j) in producto.image" :key="j" >
-											<img v-if="i!=null" v-bind:src="`/uploads/${ producto.id }/min_${i.file_name}`"  class="img-responsive"  style="width: 100%;" />
-											<p  v-else >No contiene una imagen asignada</p>
+										<td class="col-md-4" v-if="producto.image.length==0" >
+											<p >No contiene una imagen asignada</p>
+											
 										</td> 
+										<td  v-else class="col-md-4" v-for="(i,j) in producto.image" :key="j" >
+											<img  v-bind:src="`/uploads/${ producto.id }/min_${i.file_name}`"  class="img-responsive"  style="width: 80%;" />
+
+										</td> 
+										
 									      <td class="col-md-2" v-text="producto.titulo"></td>
 									      <td class="col-md-2" v-text="producto.codigo"></td>
 									      <td class="col-md-1" v-text="producto.costo"></td>
