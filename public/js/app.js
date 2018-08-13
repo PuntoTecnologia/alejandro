@@ -43707,6 +43707,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -43775,6 +43776,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		cambiarPagina: function cambiarPagina(page, buscar, criterio) {
 			var me = this;
+			console.log(page);
 			//Actualiza la página actual
 			me.pagination.current_page = page;
 			//Envia la petición para visualizar la data de esa página
@@ -43946,17 +43948,21 @@ var render = function() {
                       [
                         _vm._l(producto.image, function(i, j) {
                           return _c("td", { key: j, staticClass: "col-md-4" }, [
-                            _c("img", {
-                              staticClass: "img-responsive",
-                              staticStyle: { width: "50%" },
-                              attrs: {
-                                src:
-                                  "/uploads/" +
-                                  producto.id +
-                                  "/min_" +
-                                  i.file_name
-                              }
-                            })
+                            i != null
+                              ? _c("img", {
+                                  staticClass: "img-responsive",
+                                  staticStyle: { width: "100%" },
+                                  attrs: {
+                                    src:
+                                      "/uploads/" +
+                                      producto.id +
+                                      "/min_" +
+                                      i.file_name
+                                  }
+                                })
+                              : _c("p", [
+                                  _vm._v("No contiene una imagen asignada")
+                                ])
                           ])
                         }),
                         _vm._v(" "),
@@ -44046,7 +44052,7 @@ var render = function() {
                   "ul",
                   { staticClass: "pagination" },
                   [
-                    this.pagination.current_page > 1
+                    _vm.pagination.current_page > 1
                       ? _c("li", { staticClass: "page-item" }, [
                           _c(
                             "a",
@@ -44057,7 +44063,7 @@ var render = function() {
                                 click: function($event) {
                                   $event.preventDefault()
                                   _vm.cambiarPagina(
-                                    this.pagination.current_page - 1,
+                                    _vm.pagination.current_page - 1,
                                     _vm.buscar,
                                     _vm.criterio
                                   )
@@ -44097,7 +44103,7 @@ var render = function() {
                       )
                     }),
                     _vm._v(" "),
-                    this.pagination.current_page < this.pagination.last_page
+                    _vm.pagination.current_page < _vm.pagination.last_page
                       ? _c("li", { staticClass: "page-item" }, [
                           _c(
                             "a",
@@ -44108,7 +44114,7 @@ var render = function() {
                                 click: function($event) {
                                   $event.preventDefault()
                                   _vm.cambiarPagina(
-                                    this.pagination.current_page + 1,
+                                    _vm.pagination.current_page + 1,
                                     _vm.buscar,
                                     _vm.criterio
                                   )
@@ -44165,7 +44171,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("IMG")]),
+        _c("th", { staticClass: "text-center", attrs: { scope: "col" } }, [
+          _vm._v("IMG")
+        ]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("TITULO")]),
         _vm._v(" "),

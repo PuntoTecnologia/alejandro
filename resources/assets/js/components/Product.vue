@@ -38,7 +38,7 @@
 							<table  id="tabla" class="display table" cellspacing="0" width="100%">
 						        <thead>
 								    <tr>
-								      <th scope="col">IMG</th>
+								      <th scope="col" class="text-center">IMG</th>
 								      <th scope="col">TITULO</th>
 								      <th scope="col">CODIGO</th>
 								      <th scope="col">COSTO</th>
@@ -50,7 +50,8 @@
 							    	<tr v-for="(producto,index) in this.productos" :key="index" >
 										
 										<td class="col-md-4" v-for="(i,j) in producto.image" :key="j" >
-											<img  v-bind:src="`/uploads/${ producto.id }/min_${i.file_name}`" class="img-responsive"  style="width: 50%;" />
+											<img v-if="i!=null" v-bind:src="`/uploads/${ producto.id }/min_${i.file_name}`"  class="img-responsive"  style="width: 100%;" />
+											<p  v-else >No contiene una imagen asignada</p>
 										</td> 
 									      <td class="col-md-2" v-text="producto.titulo"></td>
 									      <td class="col-md-2" v-text="producto.codigo"></td>
@@ -67,14 +68,14 @@
 							<div class="row">
 									<nav class="col-md-6">
                             <ul class="pagination">
-                                <li class="page-item" v-if="this.pagination.current_page > 1">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(this.pagination.current_page - 1,buscar,criterio)">Ant</a>
+                                <li class="page-item" v-if="pagination.current_page > 1">
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)">Ant</a>
                                 </li>
                                 <li class="page-item"  v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']" >
                                     <a class="page-link" href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page" ></a>
                                 </li>
-                                <li class="page-item" v-if="this.pagination.current_page < this.pagination.last_page">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(this.pagination.current_page + 1,buscar,criterio)">Sig</a>
+                                <li class="page-item" v-if="pagination.current_page < pagination.last_page">
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)">Sig</a>
                                 </li>
                             </ul>
                         </nav>					
@@ -161,6 +162,7 @@ import axios from 'axios';
 			},
 			cambiarPagina(page,buscar,criterio){
                 let me = this;
+				console.log(page);
                 //Actualiza la página actual
                 me.pagination.current_page = page;
                 //Envia la petición para visualizar la data de esa página
